@@ -21,22 +21,17 @@ services:
       - front
       - mail
   exo-cluster-node1:
-    image: exoplatform/exo:6.0.x-cluster-SNAPSHOT
+    image: exoplatform/exo:6.1.x-cluster-SNAPSHOT
     volumes:
       - ./data/exo-node1/:/srv/exo/:rw
       - ./logs/exo-node1/:/var/log/exo/:rw
-      # added to allow downloading from local folders patches 
-      - ./addons/catalogs:/opt/exo/addons/catalogs:rw
-      - ./addons/archives:/opt/exo/addons/archives:rw
     environment:
-      # Addons management
-      EXO_ADDONS_LIST: 
       # - Addon wallet deleted temporarly because it needs internet connection
       EXO_ADDONS_REMOVE_LIST: meeds-wallet
       # Chat in standalone mode
       EXO_CHAT_SERVER_STANDALONE: "true"
       # This is the addon version of exo-chat-client that will be downloaded from catalog
-      EXO_CHAT_VERSION: "3.0.x-SNAPSHOT"
+      EXO_CHAT_VERSION: "3.1.x-SNAPSHOT"
       EXO_CHAT_SERVER_PASSPHRASE: change-this-password
       # Chat URL for Browser
       EXO_CHAT_SERVER_URL: http://localhost
@@ -89,22 +84,17 @@ services:
     # Wait until chat server is started
     command: ["wait-for", "exo-chat:8080", "-s", "-t", "360", "--", "/opt/exo/start_eXo.sh"]
   exo-cluster-node2:
-    image: exoplatform/exo:6.0.x-cluster-SNAPSHOT
+    image: exoplatform/exo:6.1.x-cluster-SNAPSHOT
     volumes:
       - ./data/exo-node2/:/srv/exo/:rw
       - ./logs/exo-node2/:/var/log/exo/:rw
-      # added to allow downloading from local folders patches 
-      - ./addons/catalogs:/opt/exo/addons/catalogs:rw
-      - ./addons/archives:/opt/exo/addons/archives:rw
     environment:
-      # Addons management
-      EXO_ADDONS_LIST: 
       # - Addon wallet deleted temporarly because it needs internet connection
       EXO_ADDONS_REMOVE_LIST: meeds-wallet
       # Chat in standalone mode
       EXO_CHAT_SERVER_STANDALONE: "true"
       # This is the addon version of exo-chat-client that will be downloaded from catalog
-      EXO_CHAT_VERSION: "3.0.x-SNAPSHOT"
+      EXO_CHAT_VERSION: "3.1.x-SNAPSHOT"
       EXO_CHAT_SERVER_PASSPHRASE: change-this-password
       # Chat URL for Browser
       EXO_CHAT_SERVER_URL: http://localhost
